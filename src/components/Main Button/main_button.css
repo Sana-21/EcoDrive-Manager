@@ -1,0 +1,14 @@
+.btn-primary {
+    color: white;
+    border: none;
+    border-radius: 25px;
+    height: 40px;
+    width: 101px;
+    cursor: pointer;
+    margin-left: auto;
+    font-family: "Montserrat", sans-serif;
+}
+  
+.main{
+background-color: #72c578;
+}

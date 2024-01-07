@@ -1,0 +1,16 @@
+.btn-primary{
+    color: white;
+    border: none;
+    border-radius: 25px;
+    height: 40px;
+    width: 101px;
+    cursor: pointer;
+    margin-left: auto;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+
+.signup-btn{
+    background-color: #31A0FE;
+    margin-right: 10px;
+}

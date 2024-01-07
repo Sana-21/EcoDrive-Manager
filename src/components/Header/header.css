@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Quicksand&display=swap');
+
+
+.header-bg {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+  
+  .logo-box {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo-img {
+    height: 60px;
+  }
+  
+  .logo-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .header-title {
+    display: flex;
+    align-items: center;
+    margin-left: 0.5em;
+  }
+  
+  .header-title h3 {
+    font-size: 22px;
+    color: #252b42;
+    margin: 0;
+  }
+  
+  .icon-button-container {
+    display: flex;
+    align-items:end;
+    justify-content: flex-end;
+    padding-right: 15px;
+  }
+  
+  @media (max-width: 920px) {
+    .header-bg {
+      justify-content: center;
+    }
+    .header-title {
+      margin-right: 60px;
+    }
+  }
+  
+
+  .header-bg {
+    display: flex;
+    justify-content: space-around; /* Adjust as needed */
+    align-items: center;
+    padding: 10px; /* Add padding as needed */
+  }
+  
+  .header-list {
+    list-style-type: none;
+    display: flex;
+    margin-left: 10%;
+  }
+  
+  .header-list li {
+    margin-right: 60px;
+    color: #737373;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+
+  }
+
+nav {
+    margin-left: 0px; /* Adjust the margin as needed */
+}
+  
+  
+  @media (max-width: 920px) {
+    .header-bg {
+      flex-direction: column; /* Stack items vertically on smaller screens */
+      text-align: center; /* Center text when stacked vertically */
+      padding-right: 0; /* Remove padding on the right */
+    }
+  
+    .header-list {
+      margin-top: 15px; /* Add spacing between logo/title and the list */
+      justify-content: center; /* Center the list horizontally */
+    }
+  
+    .header-title {
+      margin-right: 0; /* Adjust margin for smaller screens */
+    }
+  }
