@@ -5,7 +5,7 @@ import PhoneImage from "../../assets/images/iphone.png";
 import AppStoreImage from "../../assets/images/app-store.png";
 import PlaystoreImage from "../../assets/images/google-play.png";
 import BlueImage from "../../assets/images/bluebox.png";
-import GreenImage from "../../assets/images/greenbox.png"
+import GreenImage from "../../assets/images/greenbox.png";
 import "./welcome_screen.css";
 function WelcomeScreen() {
   return (
