@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+
+.home-bg {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url("../../assets/images/map-bg.jpg") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: space-between; 
+  }
+  
+.home-bg::before {
+content: "";
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+background: rgba(225, 244, 255, 0.9);
+}
+  
+
+.network-box{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding-left: 5%;
+}
+.network-img{
+    padding-top: 2%;
+    height: 450px;
+    width: 650px;
+}
+
+.home-heading{
+    padding-top: 8%;
+    font-family: 'Cabin', sans-serif;
+    font-weight: bold;
+    font-size: 48px;
+    padding-left:15%;
+    color: #252B42;
+}
+
+.home-description{
+    padding-top: 2%;
+    font-family: 'Cabin', sans-serif;
+    font-size: 20px;
+    padding-left: 15%;
+    color: #252B42;
+}
+
+.home-text{
+    width: 70%;
+}
+
+
+.phone-content {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: space-around;
+    margin-left: auto;
+    z-index: 1;
+    position: relative;
+  }
+  
+.phone-img{
+    padding-top: 20%;
+    height: 500px;
+    width: 350px;
+    padding-left: 20%;
+
+}
+
+.download-btns{
+    display: flex;
+}
+
+.appstore-img{
+    width: 250px;
+    height: 85px;
+}
+
+.playstore-img{
+    width: 250px;
+    height: 85px;
+}
+
+.blue-img{
+    position: absolute;
+    top: 30%;
+
+    width: 240px;
+    height: 80px;
+
+}
+
+.green-img{
+    position: absolute;
+    top: 50%;
+    left: 35%;
+
+    width: 240px;
+    height: 80px;
+}
