@@ -2,12 +2,12 @@ import React from "react";
 import "./login-screen.css";
 import Header from "../../components/Header/Header";
 import network from "../../assets/images/network-image.jpg";
-import MainButton from "../../components/Main Button/Main_Button";
+import MainButton from "../../components/MainButton/Main_Button";
 
 function LoginScreen() {
   return (
     <div class="login-bg">
-      <Header showButton={false} />
+      <Header showButton={true} showOptions={true}/>
       <div class="network-box">
         <img class="network-img" src={network} alt="network" />
       </div>

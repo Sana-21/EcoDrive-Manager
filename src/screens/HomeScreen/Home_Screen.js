@@ -8,7 +8,7 @@ import Building from "../../assets/images/building.png"
 function Dashboard() {
   return (
     <div>
-      <Header showButton={true} />
+      <Header showButton={false} showOptions={false} />
       <div className="dashboard-bg">
         <div className="dashboard-content">
           <div className="left-box">

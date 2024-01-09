@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import LoginScreen from './screens/LoginScreen/Login_Screen';
 import WelcomeScreen from './screens/WelcomeScreen/Welcome_Screen';
 import HomeScreen from './screens/HomeScreen/Home_Screen'
-//import LoginScreen from "./screens/Login Screen/Login_Screen";
+import SignUpScreen from "./screens/SignUpScreen/Signup_Screen";
 function App() {
 
  return(
@@ -14,6 +14,7 @@ function App() {
     <Route exact path="/" element ={<WelcomeScreen/>} />
     <Route path="/home" element={<HomeScreen/>} />
     <Route path="/login" element={<LoginScreen/>} />
+    <Route path="/signup" element={<SignUpScreen/>} />
     </Routes>
     </BrowserRouter>
  );

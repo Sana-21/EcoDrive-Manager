@@ -42,10 +42,7 @@
   }
   
   .icon-button-container {
-    display: flex;
-    align-items:end;
-    justify-content: flex-end;
-    padding-right: 15px;
+    margin-right: 20%;
   }
   
   @media (max-width: 920px) {
@@ -60,9 +57,10 @@
 
   .header-bg {
     display: flex;
-    justify-content: space-around; /* Adjust as needed */
+    justify-content: space-between; /* Adjust as needed */
     align-items: center;
     padding: 10px; /* Add padding as needed */
+    padding-left: 5%;
   }
   
   .header-list {
@@ -100,3 +98,8 @@ nav {
       margin-right: 0; /* Adjust margin for smaller screens */
     }
   }
+
+  .header-list a.active {
+    text-decoration: underline;
+  }
+  
