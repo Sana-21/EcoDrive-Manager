@@ -10,7 +10,7 @@ import "./welcome_screen.css";
 function WelcomeScreen() {
   return (
     <div>
-      <Header showButton={true} />
+      <Header showButton={true} showOptions={true} />
       <div className="home-bg welcome-page">
         <div class="network-box">
               <div className = "home-text">

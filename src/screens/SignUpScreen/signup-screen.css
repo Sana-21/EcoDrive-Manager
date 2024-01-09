@@ -1,0 +1,141 @@
+.signup-bg {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+.network-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 90%;
+}
+.network-img {
+  height: 80%;
+}
+
+.signup-box {
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  height: 620px;
+  border-radius: 36px;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 60%;
+  margin-top: 2%;
+}
+
+.signup-title h3 {
+  text-align: center;
+  margin: 0;
+  padding-bottom: 20px;
+  color: #252b42;
+  font-size: 30px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+  font-size: 18px;
+}
+
+.btn-container {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.form-control {
+  width: 94%;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+input::placeholder {
+  font-family: "Montserrat", sans-serif;
+}
+
+input {
+  font-family: "Montserrat", sans-serif;
+  border-radius: 5px;
+}
+
+input:focus {
+  background-color: #f2f2f2;
+  border-color: #72c578;
+  outline: none;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 920px) {
+  .network-box {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  .signup-box {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+.office-location-input {
+  flex: 1;
+  padding-right: 30px; /* Space for the button */
+  box-sizing: border-box;
+}
+
+.location-button {
+  position: absolute;
+  top: 50%;
+  right: 5px; /* Adjust the distance from the right */
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.location-button img {
+  width: 20px; /* Adjust the size of the image */
+  height: 20px;
+}
+
+.office-location-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  .office-location-group label {
+    margin-bottom: 8px;
+  }
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .office-location-input {
+    flex: 1;
+    padding-right: 30px; /* Space for the button */
+    box-sizing: border-box;
+  }
+
+  .location-button {
+    margin-left: -30px; /* Negative margin to overlap with input */
+    cursor: pointer;
+  }
+
+  .location-button img {
+    width: 20px; /* Adjust the size of the image */
+    height: 20px;
+  }
