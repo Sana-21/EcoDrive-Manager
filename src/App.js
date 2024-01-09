@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Dashboard from "./screens/Dashboard/Dashboard";
 import LoginScreen from './screens/LoginScreen/Login_Screen';
 import WelcomeScreen from './screens/WelcomeScreen/Welcome_Screen';
 import HomeScreen from './screens/HomeScreen/Home_Screen'
