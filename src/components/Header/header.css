@@ -100,6 +100,22 @@ nav {
   }
 
   .header-list a.active {
-    text-decoration: underline;
+    text-decoration:  bold;
   }
   
+  /* styles.css */
+
+.header-list li a:visited {
+  text-decoration: none;
+  color: #000;
+}
+
+.header-list li{
+  text-decoration: none;
+  color: black;
+}
+
+.header-list li a{
+  text-decoration: none;
+  color: black;
+}

@@ -38,9 +38,9 @@ function Header({ showButton, showOptions }) {
       {showOptions && (
         <nav>
           <ul className="header-list">
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
+            <li><Link to = "/">Home </Link></li>
+            <li><Link to = "/about">About  </Link></li>
+            <li><Link to = "/contact">Contact </Link></li>
           </ul>
         </nav>
       )}
