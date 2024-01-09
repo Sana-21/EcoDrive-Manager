@@ -1,0 +1,94 @@
+.list-holder {
+    position: relative;
+    padding: 30px;
+    box-sizing: border-box;
+    z-index: 2;
+    height: 85%;
+    background-color: white;
+    margin: 20px;
+    margin-top: 100px;
+    padding: 30px;
+    border-radius: 34px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    margin-left: 100px;
+  }
+  
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  .list-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1f3e41;
+  }
+  
+  .search-container {
+    margin-right: 10px;
+    position: relative;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 45px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-sizing: border-box;
+    margin-left: 8px;
+  }
+  
+  .cross-mark-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 50%;
+  }
+  
+  .search-icon {
+    height: 24px;
+    cursor: pointer;
+    margin-left: 150px;
+  }
+  
+  .list-body {
+    box-sizing: border-box;
+    margin-top: 20px;
+    height: 90%;
+    background-color: #92e3a9;
+    z-index: 4;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .list-items {
+    position: relative;
+    height: 90%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin: 18px;
+  }
+  
+  .list-items::-webkit-scrollbar-track {
+    background-color: #ffffff;
+    border-radius: 10px;
+  }
+  
+  .list-items::-webkit-scrollbar-thumb {
+    background-color: #1f3e41;
+    border-radius: 10px;
+  }
+  
+  .list-items::-webkit-scrollbar {
+    width: 14px;
+    height: 12px;
+  }
