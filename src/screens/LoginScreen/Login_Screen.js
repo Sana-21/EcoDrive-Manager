@@ -18,13 +18,13 @@ function LoginScreen() {
         <div class="login-form">
           <form>
             <div class="form-group">
-              <label for="username">Username</label>
+              <label for="email">Domain Email</label>
               <input
                 class="form-control"
                 type="text"
-                name="username"
-                id="username"
-                placeholder="Enter your username"
+                name="email"
+                id="email"
+                placeholder="Enter your email"
                 required
               />
             </div>
