@@ -1,97 +1,158 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./signup-screen.css";
 import Header from "../../components/Header/Header";
 import network from "../../assets/images/network-image.jpg";
 import MainButton from "../../components/MainButton/Main_Button";
 import LocationIcon from "../../assets/images/location-icon.png";
+import axios from 'axios';
 
 function SignupScreen() {
+    const [companyName, setCompanyName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [officeLocation, setOfficeLocation] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [selectedFile, setSelectedFile] = useState(null);
+    
+    useEffect(() => {
+        if (successMessage || errorMessage) {
+            const timer = setTimeout(() => {
+                setSuccessMessage("");
+                setErrorMessage("");
+            }, 5000);
+            return () => clearTimeout(timer);
+        }
+    }, [successMessage, errorMessage]);
+    
+
+    const handleFileChange = (e) => {
+        setSelectedFile(e.target.files[0]);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (password !== confirmPassword) {
+            setErrorMessage("Passwords do not match.");
+            return;
+        }
+
+        try {
+            const formData = new FormData();
+            formData.append("companyName", companyName);
+            formData.append("email", email);
+            formData.append("password", password);
+            formData.append("officeLocation", officeLocation);
+            formData.append("officeImage", selectedFile);
+
+            const response = await axios.post("http://localhost:3001/api/manager/signup", formData);
+
+            if (response.data.success) {
+                setSuccessMessage('Please check your email for verification');
+            } else {
+                setErrorMessage(response.data.message || 'Error during signup process.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setErrorMessage(error.response?.data?.message || 'Error during signup process');
+        }
+    };
+
     return (
-        <div class="signup-bg">
-            <Header showButton={true} showOptions = {true}/>
-            <div class="network-box">
-                <img class="network-img" src={network} alt="network" />
+        <div className="signup-bg">
+            <Header showButton={true} showOptions={true} />
+
+            <div className="network-box">
+                {successMessage && <div className="success-message">{successMessage}</div>}
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
+                <img className="network-img" src={network} alt="Network" />
             </div>
-            <div class="signup-box">
-                <div class="signup-title">
+
+            <div className="signup-box">
+                <div className="signup-title">
                     <h3>Sign Up</h3>
                 </div>
-                <div class="signup-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="company-name">Company Name</label>
+
+                <div className="signup-form">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="company-name">Company Name</label>
                             <input
-                                class="form-control"
+                                className="form-control"
                                 type="text"
-                                name="company-name"
                                 id="company-name"
                                 placeholder="Enter your company name"
                                 required
+                                value={companyName}
+                                onChange={(e) => setCompanyName(e.target.value)}
                             />
                         </div>
-                        <div class="form-group">
-                            <label for="email">Domain Email</label>
+                        <div className="form-group">
+                            <label htmlFor="email">Domain Email</label>
                             <input
-                                class="form-control"
-                                type="text"
-                                name="email"
+                                className="form-control"
+                                type="email"
                                 id="email"
                                 placeholder="Enter your email"
                                 required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
                             <input
-                                class="form-control"
+                                className="form-control"
                                 type="password"
-                                name="password"
                                 id="password"
                                 placeholder="Enter your password"
                                 required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
-                        <div class="form-group">
-                            <label for="confirm-password">Confirm Password</label>
+                        <div className="form-group">
+                            <label htmlFor="confirm-password">Confirm Password</label>
                             <input
-                                class="form-control"
+                                className="form-control"
                                 type="password"
-                                name="confirm-password"
                                 id="confirm-password"
                                 placeholder="Enter your password again"
                                 required
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
                             />
                         </div>
-                        <div class="form-group office-location-group">
-                            <label for="office-location">Office Location</label>
-                            <div class="input-group">
+                        <div className="form-group office-location-group">
+                            <label htmlFor="office-location">Office Location</label>
+                            <div className="input-group">
                                 <input
                                     className="form-control office-location-input"
                                     type="text"
-                                    name="office-location"
                                     id="office-location"
                                     placeholder="Address"
                                     required
+                                    value={officeLocation}
+                                    onChange={(e) => setOfficeLocation(e.target.value)}
                                 />
-                                <div class="location-button">
-
+                                <div className="location-button">
                                     <img src={LocationIcon} alt="Location" />
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="office-image">Upload Picture</label>
+                        <div className="form-group">
+                            <label htmlFor="office-image">Upload Picture</label>
                             <input
-                                class="form-control"
                                 type="file"
-                                name="office-image"
+                                accept="image/*"
                                 id="office-image"
-                                placeholder="Office Image"
-                                required
+                                name="officeImage"
+                                onChange={handleFileChange}
                             />
                         </div>
-                        <div class="btn-container">
-                            <MainButton text="Sign Up" />
+                        <div className="btn-container">
+                            <MainButton text="Sign Up" type="submit" /> {/* Changed to type="submit" */}
                         </div>
                     </form>
                 </div>
