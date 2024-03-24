@@ -1,0 +1,5 @@
+
+// actionTypes.js
+export const SET_MANAGER_ID = 'SET_MANAGER_ID';
+export const FETCH_USER_DATA_SUCCESS = 'FETCH_USER_DATA_SUCCESS';
+export const FETCH_USER_DATA_FAILURE = 'FETCH_USER_DATA_FAILURE';

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./signup-screen.css";
+import "./edit-screen.css"; 
 import Header from "../../components/Header/Header";
-import network from "../../assets/images/network-image.jpg";
 import MainButton from "../../components/MainButton/Main_Button";
 import LocationIcon from "../../assets/images/location-icon.png";
 import SearchLocationInput from "../../components/LocationSearchBar/Find_Location";
@@ -9,14 +8,9 @@ import MapComponent from "../../components/Map/MapComponent";
 import Popup from 'reactjs-popup';
 import axios from 'axios';
 
-function SignupScreen() {
-
-    const [companyName, setCompanyName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [officeLocation, setOfficeLocation] = useState("");
-    const [successMessage, setSuccessMessage] = useState("");
+function EditScreen({ userData }) {
+    const [companyName, setCompanyName] = useState(userData.companyName || "");
+    const [officeLocation, setOfficeLocation] = useState(userData.officeLocation || "");
     const [errorMessage, setErrorMessage] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
     const [selectedLocation, setSelectedLocation] = useState({
@@ -24,69 +18,48 @@ function SignupScreen() {
         lng: 74.3587,
     });
 
-
-
     useEffect(() => {
-        if (successMessage || errorMessage) {
-            const timer = setTimeout(() => {
-                setSuccessMessage("");
-                setErrorMessage("");
-            }, 5000);
-            return () => clearTimeout(timer);
-        }
-    }, [successMessage, errorMessage]);
-
+        setCompanyName(userData.companyName || "");
+        setOfficeLocation(userData.officeLocation || "");
+    }, [userData]);
 
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
     };
 
-
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if (password !== confirmPassword) {
-            setErrorMessage("Passwords do not match.");
-            return;
-        }
+       
 
         try {
             const formData = new FormData();
             formData.append("companyName", companyName);
-            formData.append("email", email);
-            formData.append("password", password);
             formData.append("officeLocation", officeLocation);
             formData.append("officeImage", selectedFile);
 
-            const response = await axios.post("http://localhost:3001/api/manager/signup", formData);
+            const response = await axios.put(`http://localhost:3001/api/user/${userData.id}`, formData);
 
             if (response.data.success) {
-                setSuccessMessage('Please check your email for verification');
+                // Handle success
             } else {
-                setErrorMessage(response.data.message || 'Error during signup process.');
+                setErrorMessage(response.data.message || 'Error during update process.');
             }
         } catch (error) {
             console.error('Error:', error);
-            setErrorMessage(error.response?.data?.message || 'Error during signup process');
+            setErrorMessage(error.response?.data?.message || 'Error during update process');
         }
     };
 
-
     return (
-        <div className="signup-bg">
+        <div className="edit-bg">
             <Header showButton={true} showOptions={true} />
 
-            <div className="network-box">
-                {successMessage && <div className="success-message">{successMessage}</div>}
-                {errorMessage && <div className="error-message">{errorMessage}</div>}
-                <img className="network-img" src={network} alt="Network" />
-            </div>
-
-            <div className="signup-box">
-                <div className="signup-title">
-                    <h3>Sign Up</h3>
+            <div className="edit-box">
+                <div className="edit-title">
+                    <h3>Edit Profile</h3>
                 </div>
 
-                <div className="signup-form">
+                <div className="edit-form">
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="company-name">Company Name</label>
@@ -100,42 +73,7 @@ function SignupScreen() {
                                 onChange={(e) => setCompanyName(e.target.value)}
                             />
                         </div>
-                        <div className="form-group">
-                            <label htmlFor="email">Domain Email</label>
-                            <input
-                                className="form-control"
-                                type="email"
-                                id="email"
-                                placeholder="Enter your email"
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                className="form-control"
-                                type="password"
-                                id="password"
-                                placeholder="Enter your password"
-                                required
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="confirm-password">Confirm Password</label>
-                            <input
-                                className="form-control"
-                                type="password"
-                                id="confirm-password"
-                                placeholder="Enter your password again"
-                                required
-                                value={confirmPassword}
-                                onChange={(e) => setConfirmPassword(e.target.value)}
-                            />
-                        </div>
+    
                         <Popup
                             trigger={
                                 <div className="form-group office-location-group">
@@ -164,13 +102,13 @@ function SignupScreen() {
                                     <SearchLocationInput setSelectedLocation={setSelectedLocation} setOfficeLocation={setOfficeLocation} />
                                     <MapComponent selectedLocation={selectedLocation} />
                                     <div className="btn-container">
-                                    <MainButton text="Add Location" onClick={() => { close(); setSelectedLocation(selectedLocation); }}/>
+                                        <MainButton text="Update Location" onClick={() => { close(); setSelectedLocation(selectedLocation); }}/>
                                     </div>
                                 </div>
                             )}
                         </Popup>
                         <div className="form-group">
-                            <label htmlFor="office-image">Upload Picture</label>
+                            <label htmlFor="office-image">Upload New Picture</label>
                             <input
                                 type="file"
                                 accept="image/*"
@@ -179,8 +117,9 @@ function SignupScreen() {
                                 onChange={handleFileChange}
                             />
                         </div>
+                        {errorMessage && <div className="error-message">{errorMessage}</div>}
                         <div className="btn-container">
-                            <MainButton text="Sign Up" type="submit" />
+                            <MainButton text="Save Changes" type="submit" />
                         </div>
                     </form>
                 </div>
@@ -189,5 +128,4 @@ function SignupScreen() {
     );
 }
 
-export default SignupScreen;
-
+export default EditScreen;
