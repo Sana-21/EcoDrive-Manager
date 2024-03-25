@@ -26,14 +26,14 @@
   }
   
   .left-box {
-    flex: 40%;
+    flex: 45%;
     height: 100%;
     position: relative;
     overflow: hidden;
   }
   
   .right-box {
-    flex: 60%;
+    flex: 45%;
     height: 85%;
     padding-top: 100px;
     padding-left: 100px;
@@ -43,7 +43,7 @@
   }
 
   .location-img{
-    width: 750px;
+    width: 600px;
     height: 242px;
   }
 
@@ -54,7 +54,7 @@
 
 
 .home-bottom{
-    width: 80%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
 }

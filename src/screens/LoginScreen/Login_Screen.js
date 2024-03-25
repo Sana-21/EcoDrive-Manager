@@ -1,8 +1,8 @@
 // LoginScreen.js
 import React, { useState } from "react";
-// // import { useDispatch } from 'react-redux';
-// import { setUserId } from '../../path/to/actions';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from "../../redux/userActions";
 import "./login-screen.css";
 import Header from "../../components/Header/Header";
 import network from "../../assets/images/network-image.jpg";
@@ -11,20 +11,15 @@ import MainButton from "../../components/MainButton/Main_Button";
 function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const dispatch = useDispatch();
-
-  // const handleLogin = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await axios.post("http://localhost:3001/api/manager/login", { email, password });
-  //     const { userId } = response.data;
-  //     dispatch(setUserId(userId));
-  //   } catch (error) {
-  //     console.error('Error logging in:', error);
-  //   }
-  // };
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); 
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    dispatch(loginUser({ email, password })); // Pass an object with email and password
+    navigate('/home');
+  };
+  
   return (
     <div className="login-bg">
       <Header showButton={true} showOptions={true}/>
@@ -36,7 +31,7 @@ function LoginScreen() {
           <h3>Login</h3>
         </div>
         <div className="login-form">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Domain Email</label>
               <input

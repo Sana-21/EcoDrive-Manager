@@ -1,4 +1,4 @@
-.signup-bg {
+.edit-bg {
   height: 100%;
   margin: 0;
   overflow: hidden;
@@ -14,7 +14,7 @@
   height: 80%;
 }
 
-.signup-box {
+.edit-box {
   border: 1px solid #e6e6e6;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 400px;
@@ -26,11 +26,11 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  margin-left: 60%;
+  margin-left: 40%;
   margin-top: 2%;
 }
 
-.signup-title h3 {
+.edit-title h3 {
   text-align: center;
   margin: 0;
   padding-bottom: 20px;

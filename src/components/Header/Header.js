@@ -18,7 +18,7 @@ function Header({ showButton, showOptions }) {
     </div>
   ) : (
     <div className="icon-button-container">
-    <Link to = "/welcome">
+    <Link to = "/">
     <MainButton text="Sign Out" />
     </Link>
     </div>

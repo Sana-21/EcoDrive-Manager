@@ -12,7 +12,7 @@ function WelcomeScreen() {
     <div>
       <Header showButton={true} showOptions={true} />
       <div className="home-bg welcome-page">
-        <div class="network-box">
+        <div className="network-box">
               <div className = "home-text">
                 <div className="home-heading">
                 A Green Ride Sharing 
