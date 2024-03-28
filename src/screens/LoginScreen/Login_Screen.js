@@ -2,6 +2,7 @@
 import React, { useState , useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from "../../redux/userActions";
+import { setUserId } from "../../redux/userSlice";
 import "./login-screen.css";
 import Header from "../../components/Header/Header";
 import network from "../../assets/images/network-image.jpg";
@@ -18,7 +19,7 @@ function LoginScreen() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(loginUser({ email, password })); 
+      const userId = await dispatch(loginUser({ email, password })); 
       navigate('/home'); 
     } catch (error) {
       console.error('Login failed:', error);

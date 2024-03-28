@@ -10,8 +10,10 @@ import { fetchUserData } from '../../redux/userActions';
 
 function Dashboard() {
   const isAuthenticated = useSelector(state => state.user.userId !== null);
-  const userData = useSelector(state => state.user.userData);
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.user.userId);
+  const userData = useSelector(state => state.user.userData);
+
 
   const officeLongitude = useSelector(state => state.user.userData?.manager?.officeLongitude);
   const officeLatitude = useSelector(state => state.user.userData?.manager?.officeLatitude);
@@ -28,11 +30,7 @@ function Dashboard() {
     return <Navigate to="/login" />;
   }
 
-  // Check if userData is available
-  if (!userData) {
-    return <div>Loading...</div>; // or any other loading indicator
-  }
-
+  
   // Check if manager data is available
   if (!userData.manager) {
     return <div>No manager data found</div>; // or handle accordingly
