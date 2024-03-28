@@ -55,6 +55,8 @@ function SignupScreen() {
             formData.append("email", email);
             formData.append("password", password);
             formData.append("officeLocation", officeLocation);
+            formData.append("officeLatitude", selectedLocation.lat); 
+            formData.append("officeLongitude", selectedLocation.lng);
             formData.append("officeImage", selectedFile);
 
             const response = await axios.post("http://localhost:3001/api/manager/signup", formData);

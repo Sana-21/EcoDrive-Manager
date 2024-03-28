@@ -1,4 +1,3 @@
-// userSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 import { loginUser, fetchUserData, logoutUser } from './userActions';
 
@@ -58,6 +57,10 @@ const userSlice = createSlice({
         state.userId = null;
         state.userData = null;
         state.isAuthenticated = false;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.userId = null;
+        state.error = action.payload; 
       });
   },
 });

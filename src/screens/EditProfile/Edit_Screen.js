@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./edit-screen.css"; 
+import "./edit-screen.css";
 import Header from "../../components/Header/Header";
 import MainButton from "../../components/MainButton/Main_Button";
 import LocationIcon from "../../assets/images/location-icon.png";
@@ -8,6 +8,7 @@ import MapComponent from "../../components/Map/MapComponent";
 import Popup from 'reactjs-popup';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserData } from '../../redux/userActions';
+import { Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 
 function EditScreen() {
@@ -17,7 +18,7 @@ function EditScreen() {
 
     useEffect(() => {
         if (userId) {
-            dispatch(fetchUserData(userId)); // Fetch user data when component mounts and userId is available
+            dispatch(fetchUserData(userId));
         }
     }, [dispatch, userId]);
 
@@ -29,18 +30,24 @@ function EditScreen() {
             lat: 31.5204,
             lng: 74.3587,
         },
-        errorMessage: ""
+        errorMessage: "",
+        passwordPopupOpen: false,
+        currentPassword: "",
+        newPassword: "",
+        passwordChangeSuccess: false
     });
-  
+
 
     useEffect(() => {
         // Update form state with fetched user data
-        setFormState(prevState => ({
-            ...prevState,
-            companyName: userData.manager.companyName || "",
-            officeLocation: userData.manager.officeLocation || ""
-        }));
-    },[]);
+        if (userData && userData.manager) {
+            setFormState(prevState => ({
+                ...prevState,
+                companyName: userData.manager.companyName || "",
+                officeLocation: userData.manager.officeLocation || ""
+            }));
+        }
+    }, [userData]);
 
     const handleFileChange = (e) => {
         setFormState(prevState => ({
@@ -58,31 +65,100 @@ function EditScreen() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         try {
             const formData = new FormData();
             formData.append("companyName", formState.companyName);
             formData.append("officeLocation", formState.officeLocation);
             formData.append("officeImage", formState.selectedFile);
-
-            const response = await axios.put(`http://localhost:3001/api/user/${userData.id}`, formData);
-
+    
+            const response = await axios.put(`http://localhost:3001/api/manager/${userData.id}`, formData);
+    
             if (response.data.success) {
-                // Handle success
+                setFormState(prevState => ({
+                    ...prevState,
+                    errorMessage: "",
+                    passwordChangeSuccess: false
+                }));
+    
+                // Display success message for 2 seconds
+                setTimeout(() => {
+                    setFormState(prevState => ({
+                        ...prevState,
+                        successMessage: "",
+                    }));
+                }, 2000);
             } else {
                 setFormState(prevState => ({
                     ...prevState,
-                    errorMessage: response.data.message || 'Error during update process.'
+                    errorMessage: response.data.message 
                 }));
             }
         } catch (error) {
             console.error('Error:', error);
             setFormState(prevState => ({
                 ...prevState,
-                errorMessage: error.response?.data?.message || 'Error during update process'
+                errorMessage: error.response?.data?.message
             }));
         }
     };
+    
+    const handlePasswordChangeSubmit = async (event) => {
+        event.preventDefault();
+    
+        try {
+            const { currentPassword, newPassword } = formState;
+            const response = await axios.put(`http://localhost:3001/api/manager/${userData.id}/change-password`, {
+                currentPassword,
+                newPassword
+            });
+    
+            if (response.data.success) {
+                // Update state to indicate password change success
+                setFormState(prevState => ({
+                    ...prevState,
+                    passwordChangeSuccess: true,
+                    errorMessage: "",
+                }));
+    
+                // Display success message for 2 seconds
+                setTimeout(() => {
+                    setFormState(prevState => ({
+                        ...prevState,
+                        successMessage: "Password changed successfully!",
+                    }));
+                }, 2000);
+            } else {
+                // Handle password change failure
+                setFormState(prevState => ({
+                    ...prevState,
+                    errorMessage: response.data.message
+                }));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setFormState(prevState => ({
+                ...prevState,
+                errorMessage: error.response?.data?.message
+            }));
+        }
+    };
+    
+
+    // Check if user is authenticated, redirect to login if not
+    const isAuthenticated = useSelector(state => state.user.userId !== null);
+    if (!isAuthenticated) {
+        // Redirect to login if not authenticated
+        return <Navigate to="/login" />;
+    }
+
+    const handleOpenPasswordPopup = () => {
+        setFormState(prevState => ({
+            ...prevState,
+            passwordPopupOpen: true
+        }));
+    };
+    
 
     return (
         <div className="edit-bg">
@@ -110,7 +186,7 @@ function EditScreen() {
                                 }))}
                             />
                         </div>
-    
+
                         <Popup
                             trigger={
                                 <div className="form-group office-location-group">
@@ -123,7 +199,7 @@ function EditScreen() {
                                             placeholder="Address"
                                             required
                                             value={formState.officeLocation}
-                                            readOnly 
+                                            readOnly
                                         />
                                         <div className="location-button">
                                             <img src={LocationIcon} alt="Location" />
@@ -133,13 +209,13 @@ function EditScreen() {
                             }
                             modal
                             nested
-                           >
+                        >
                             {(close) => (
                                 <div className="popup">
                                     <SearchLocationInput setSelectedLocation={handleLocationChange} setOfficeLocation={handleLocationChange} />
                                     <MapComponent selectedLocation={formState.selectedLocation} />
                                     <div className="btn-container">
-                                        <MainButton text="Update Location" onClick={() => { close(); }}/>
+                                        <MainButton text="Update Location" onClick={() => { close(); }} />
                                     </div>
                                 </div>
                             )}
@@ -154,15 +230,53 @@ function EditScreen() {
                                 onChange={handleFileChange}
                             />
                         </div>
+
+                        <label>Change Password</label>
+                        <button id="change-password" onClick={handleOpenPasswordPopup}>Change Password</button>
                         {formState.errorMessage && <div className="error-message">{formState.errorMessage}</div>}
+                        {formState.passwordChangeSuccess && <div className="success-message">Password changed successfully!</div>}
                         <div className="btn-container">
                             <MainButton text="Save Changes" type="submit" />
                         </div>
                     </form>
                 </div>
             </div>
+
+            {/* Password change popup */}
+            <Popup open={formState.passwordPopupOpen} onClose={() => setFormState(prevState => ({ ...prevState, passwordPopupOpen: false }))}>
+                <div className="password-change-popup">
+                    <h3>Change Password</h3>
+                    <form onSubmit={handlePasswordChangeSubmit}>
+                        <div className="form-group">
+                            <label htmlFor="current-password">Current Password</label>
+                            <input
+                                type="password"
+                                id="current-password"
+                                value={formState.currentPassword}
+                                onChange={(e) => setFormState(prevState => ({ ...prevState, currentPassword: e.target.value }))}
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="new-password">New Password</label>
+                            <input
+                                type="password"
+                                id="new-password"
+                                value={formState.newPassword}
+                                onChange={(e) => setFormState(prevState => ({ ...prevState, newPassword: e.target.value }))}
+                                required
+                            />
+                        </div>
+                        <div className="pass-btn-container">
+                            <button className="main-button" type="submit">Change</button>
+                            <button className="cancel-button" onClick={() => setFormState(prevState => ({ ...prevState, passwordPopupOpen: false }))}>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </Popup>
+
         </div>
     );
- }
+}
 
 export default EditScreen;

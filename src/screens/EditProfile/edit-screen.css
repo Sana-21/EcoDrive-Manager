@@ -50,6 +50,14 @@
   font-weight: bold;
 }
 
+.pass-btn-container {
+  text-align: center;
+  padding-top: 10px;
+  padding-right: 10%;
+  font-weight: bold;
+}
+
+
 .form-control {
   width: 94%;
   padding: 8px;
@@ -185,4 +193,12 @@ label {
   border: 'none';
   border-radius: '5px';
   cursor: 'pointer',
+}
+
+/* Add this CSS to your edit-screen.css file */
+.popup-content {
+  background-color: white !important;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
 }

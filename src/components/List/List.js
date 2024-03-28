@@ -50,7 +50,6 @@ function List({ title, quantity, placeholder }) {
             onClick={() => setSearchActive(true)}
           />
         )}
-        <SecondaryButton text="Add" backgroundColor="#92e3a9" /> 
       </div>
       <div className="list-body">
         <div className="list-items">

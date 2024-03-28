@@ -1,25 +1,40 @@
 // LoginScreen.js
-import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import React, { useState , useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from "../../redux/userActions";
 import "./login-screen.css";
 import Header from "../../components/Header/Header";
 import network from "../../assets/images/network-image.jpg";
 import MainButton from "../../components/MainButton/Main_Button";
+import { useDispatch, useSelector } from 'react-redux';
 
 function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
+  const error = useSelector(state => state.user.error);
   
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password })); // Pass an object with email and password
-    navigate('/home');
+    try {
+      await dispatch(loginUser({ email, password })); 
+      navigate('/home'); 
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
   };
-  
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        // Clear the error message after 5 seconds
+        dispatch({ type: 'CLEAR_ERROR' }); // Assuming you have a clear error action
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [error, dispatch]);
+
   return (
     <div className="login-bg">
       <Header showButton={true} showOptions={true}/>
@@ -62,6 +77,7 @@ function LoginScreen() {
               <MainButton type="submit" text="Login" />
             </div>
           </form>
+          {error && <div className="error-message">{error}</div>}
         </div>
       </div>
     </div>

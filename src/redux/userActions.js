@@ -4,9 +4,13 @@ import { apiLogin, apiFetchUserData, apiLogout } from '../api/userApi';
 
 export const loginUser = createAsyncThunk(
   'user/login',
-  async ({ email, password }) => {
-    const { userId } = await apiLogin(email, password);
-    return userId;
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const { userId } = await apiLogin(email, password);
+      return userId;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message); 
+    }
   }
 );
 
