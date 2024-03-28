@@ -8,6 +8,7 @@ import Header from "../../components/Header/Header";
 import network from "../../assets/images/network-image.jpg";
 import MainButton from "../../components/MainButton/Main_Button";
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserData } from "../../redux/userActions";
 
 function LoginScreen() {
   const [email, setEmail] = useState('');
@@ -19,7 +20,11 @@ function LoginScreen() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userId = await dispatch(loginUser({ email, password })); 
+      const {userId} = await dispatch(loginUser({ email, password })); 
+      console.log("userdmdlf");
+      console.log(userId);
+      await dispatch(setUserId(userId));
+      await dispatch(fetchUserData(userId)); 
       navigate('/home'); 
     } catch (error) {
       console.error('Login failed:', error);
@@ -78,8 +83,8 @@ function LoginScreen() {
               <MainButton type="submit" text="Login" />
             </div>
           </form>
-          {error && <div className="error-message">{error}</div>}
         </div>
+        {error && <div className="error-message">{error}</div>}
       </div>
     </div>
   );

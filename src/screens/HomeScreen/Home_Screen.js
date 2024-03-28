@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header/Header";
 import { Link, Navigate } from 'react-router-dom';
 import "./home-screen.css";
@@ -9,21 +9,24 @@ import MapComponent from "../../components/Map/MapComponent"; // Import the MapC
 import { fetchUserData } from '../../redux/userActions';
 
 function Dashboard() {
-  const isAuthenticated = useSelector(state => state.user.userId !== null);
-  const dispatch = useDispatch();
-  const userId = useSelector(state => state.user.userId);
-  const userData = useSelector(state => state.user.userData);
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+  const [loading, setLoading] = useState(true); 
 
 
   const officeLongitude = useSelector(state => state.user.userData?.manager?.officeLongitude);
   const officeLatitude = useSelector(state => state.user.userData?.manager?.officeLatitude);
 
-  // Fetch user data when the component mounts
+  const dispatch = useDispatch();
+  const userId = useSelector(state => state.user.userId);
+  const userData = useSelector(state => state.user.userData);
+
   useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(fetchUserData());
-    }
-  }, [dispatch, isAuthenticated]);
+      if (userId) {
+          dispatch(fetchUserData(userId));
+      }
+  }, [dispatch, userId]);
+
+   
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
@@ -75,7 +78,7 @@ function Dashboard() {
               </div>
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </div>
   );
