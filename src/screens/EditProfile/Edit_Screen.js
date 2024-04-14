@@ -22,6 +22,9 @@ function EditScreen() {
         }
     }, [dispatch, userId]);
 
+    
+    const { manager } = userData;
+
     const [formState, setFormState] = useState({
         companyName: "",
         officeLocation: "",
@@ -43,8 +46,8 @@ function EditScreen() {
         if (userData && userData.manager) {
             setFormState(prevState => ({
                 ...prevState,
-                companyName: userData.manager.companyName || "",
-                officeLocation: userData.manager.officeLocation || ""
+                companyName: manager.companyName || "",
+                officeLocation: manager.officeLocation || ""
             }));
         }
     }, [userData]);
@@ -72,7 +75,7 @@ function EditScreen() {
             formData.append("officeLocation", formState.officeLocation);
             formData.append("officeImage", formState.selectedFile);
     
-            const response = await axios.put(`http://localhost:3001/api/manager/${userData.id}`, formData);
+            const response = await axios.put(`http://localhost:3001/api/manager/${manager.id}`, formData);
     
             if (response.data.success) {
                 setFormState(prevState => ({
@@ -108,7 +111,7 @@ function EditScreen() {
     
         try {
             const { currentPassword, newPassword } = formState;
-            const response = await axios.put(`http://localhost:3001/api/manager/${userData.id}/change-password`, {
+            const response = await axios.put(`http://localhost:3001/api/manager/${manager.id}/change-password`, {
                 currentPassword,
                 newPassword
             });
@@ -145,12 +148,7 @@ function EditScreen() {
     };
     
 
-    // Check if user is authenticated, redirect to login if not
-    const isAuthenticated = useSelector(state => state.user.userId !== null);
-    if (!isAuthenticated) {
-        // Redirect to login if not authenticated
-        return <Navigate to="/login" />;
-    }
+  
 
     const handleOpenPasswordPopup = () => {
         setFormState(prevState => ({

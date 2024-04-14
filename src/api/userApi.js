@@ -4,8 +4,8 @@ export const apiLogin = async (email, password) => {
   try {
     const response = await axios.post('http://localhost:3001/api/manager/login', { email, password });
     console.log("login");
-    console.log(response.data);
-    return response.data;
+    console.log(response.data.userId);
+    return response.data.userId;
   } catch (error) {
     throw error;
   }

@@ -10,7 +10,7 @@ import { fetchUserData } from '../../redux/userActions';
 
 function Dashboard() {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
 
   const officeLongitude = useSelector(state => state.user.userData?.manager?.officeLongitude);
@@ -21,26 +21,29 @@ function Dashboard() {
   const userData = useSelector(state => state.user.userData);
 
   useEffect(() => {
-      if (userId) {
-          dispatch(fetchUserData(userId));
-      }
+    if (userId) {
+      dispatch(fetchUserData(userId));
+    }
   }, [dispatch, userId]);
 
-   
+
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
-  
+
   // Check if manager data is available
   if (!userData.manager) {
     return <div>No manager data found</div>; // or handle accordingly
   }
 
+  const { manager } = userData;
+
   const defaultLocation = { lat: 28.7041, lng: 77.1025 };
-  const selectedLocation = { lat: officeLatitude || defaultLocation.lat, lng: officeLongitude || defaultLocation.lng };
+  const selectedLocation = { lat: parseFloat(manager.officeLatitude) || defaultLocation.lat, lng: parseFloat(manager.officeLongitude) || defaultLocation.lng };
+
 
   return (
     <div>
@@ -51,9 +54,8 @@ function Dashboard() {
             <List title={"Members"} quantity={"15"} />
           </div>
           <div className="right-box">
-            <div className="map-container"> {/* Wrap MapComponent in a div to maintain UI layout */}
-              {/* Pass selectedLocation to MapComponent */}
-              <MapComponent selectedLocation={selectedLocation} />
+            <div className="map-div">
+            <MapComponent selectedLocation={selectedLocation} zoom = {18} height = "300px"  className="map-container" />
             </div>
             <div className="home-bottom">
               <div className="rounded-container bottom-col-1">
@@ -65,10 +67,9 @@ function Dashboard() {
                 <div className="bottom-round active-head">20</div>
               </div>
               <div className="rounded-container bottom-col-3">
-                <div className="head-text">Organisation Name</div>
-                {/* Check if userData.manager.officeImage exists before rendering the image */}
-                {userData.manager.officeImage && (
-                  <img src={userData.manager.officeImage} alt="building" className="building-img" />
+                <div className="head-text">{manager.companyName}</div>
+                {manager.officeImage && (
+                  <img src={manager.officeImage} alt="building" className="building-img" />
                 )}
                 <div className="edit-btn">
                   <Link to="/edit">
@@ -78,7 +79,7 @@ function Dashboard() {
               </div>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   );

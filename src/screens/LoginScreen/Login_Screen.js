@@ -20,8 +20,9 @@ function LoginScreen() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const {userId} = await dispatch(loginUser({ email, password })); 
-      console.log("userdmdlf");
+      const actionResult = await dispatch(loginUser({ email, password }));
+      const userId = actionResult.payload; // Extract userId from the action payload
+      console.log("handle submit");
       console.log(userId);
       await dispatch(setUserId(userId));
       await dispatch(fetchUserData(userId)); 

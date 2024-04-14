@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 .dashboard-bg {
-    position: relative;
-    width: 100%;
+    position: relative; 
+    width: 100%; 
     height: 100vh;
     background: url("../../assets/images/map-bg.jpg") no-repeat center center;
     background-size: cover;
@@ -19,55 +19,49 @@
   }
   
   .dashboard-content {
-    position: relative;
     z-index: 1;
     display: flex;
-    height: 100%;
+    height: 100vh;
+    flex-direction: row;
+    position: relative; /* Add position relative to set containing block for absolute positioning */
   }
   
   .left-box {
-    flex: 50%;
+    flex: 1; 
     height: 100%;
-    position: relative;
+    position: absolute;
     overflow: hidden;
   }
   
   .right-box {
-    flex: 50%;
-    height: 85%;
-    padding-top: 100px;
-    padding-left: 100px;
+    flex: 1; 
     display: flex;
     flex-direction: column;
-  
-  }
-
-  .location-img{
-    width: 600px;
-    height: 242px;
-  }
-  .map-container{
-     height:600px;
-     width: 242px;
-
-  }
-
-  .change-btn{
+    position: absolute;
+    right: 0; 
+    margin-left: 40%;
+    height: 100%;
     margin-top: 2%;
-    margin-left: 62%;
   }
-
-
-.home-bottom{
-    width: 90%;
+  
+  .map-div {
+    margin-top: 5%;
+    margin-bottom: 2%;
+    flex: 1;
+  }
+  
+  .home-bottom {
+    margin-bottom: 5%;
+    width: 100%;
+    flex: 1;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-}
-
-
-.rounded-container {
-    width: 35%;
-    height: 300px;
+  }
+  
+  .rounded-container {
+    width: 40%; /* Adjust the width to fit the content */
+    max-width: 350px;
     border-radius: 20px;
     background-color: #ffff;
     padding: 15px;
@@ -75,36 +69,33 @@
     flex-direction: column;
     justify-content: space-around;
     text-align: center;
-    margin-right: 20px; 
-    margin-top: 3%;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+    margin-top: 5px;
+    margin-right: 10px;
   }
-
+  
   .bottom-round {
-    width: 80%;
+    width: 100%; /* Adjust the width to fill the container */
     height: 150px;
     border-radius: 20px;
     background-color: #92e3a9;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    color: #ffffff;
     font-size: 70px;
     font-weight: bold;
-    color: #1F3E41;
+    color: #ffffff;
     font-family: 'Inter', sans-serif;
-
-}
-
-.head-text{
+  }
+  
+  .head-text {
     font-size: 26px;
     font-weight: bold;
     color: #1F3E41;
     font-family: 'Inter', sans-serif;
-}
-
-#percent{
-    font-size:20px;
-}
+  }
+  
+  #percent {
+    font-size: 20px;
+  }
+  
