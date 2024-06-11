@@ -44,7 +44,7 @@ function LoginScreen() {
 
   return (
     <div className="login-bg">
-      <Header showButton={true} showOptions={true}/>
+      <Header showSignUp = {true} showSignIn = {false} showOptions={true}/>
       <div className="network-box">
         <img className="network-img" src={network} alt="network" />
       </div>
@@ -80,7 +80,7 @@ function LoginScreen() {
                 required
               />
             </div>
-            <div className="btn-container">
+            <div className="login-btn-container">
               <MainButton type="submit" text="Login" />
             </div>
           </form>

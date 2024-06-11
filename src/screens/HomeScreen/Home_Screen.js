@@ -13,8 +13,8 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
 
 
-  const officeLongitude = useSelector(state => state.user.userData?.manager?.officeLongitude);
-  const officeLatitude = useSelector(state => state.user.userData?.manager?.officeLatitude);
+  const officeLongitude = useSelector(state => state.user.userData?.manager?.officeLocation.Longitude);
+  const officeLatitude = useSelector(state => state.user.userData?.manager?.officeLocation.Latitude);
 
   const dispatch = useDispatch();
   const userId = useSelector(state => state.user.userId);
@@ -42,7 +42,7 @@ function Dashboard() {
   const { manager } = userData;
 
   const defaultLocation = { lat: 28.7041, lng: 77.1025 };
-  const selectedLocation = { lat: parseFloat(manager.officeLatitude) || defaultLocation.lat, lng: parseFloat(manager.officeLongitude) || defaultLocation.lng };
+  const selectedLocation = { lat: parseFloat(manager.officeLocation.latitude) || defaultLocation.lat, lng: parseFloat(manager.officeLocation.longitude) || defaultLocation.lng };
 
 
   return (

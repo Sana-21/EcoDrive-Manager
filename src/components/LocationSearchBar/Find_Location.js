@@ -23,7 +23,7 @@ const loadScript = (url, callback) => {
   document.getElementsByTagName("head")[0].appendChild(script);
 };
 
-const SearchLocationInput = ({ setSelectedLocation , setOfficeLocation}) => {
+const SearchLocationInput = ({ setSelectedLocation , setOfficeAddress}) => {
   const [query, setQuery] = useState("");
   const autoCompleteRef = useRef(null);
 
@@ -54,7 +54,7 @@ const SearchLocationInput = ({ setSelectedLocation , setOfficeLocation}) => {
 
     console.log({ latLng });
     setSelectedLocation(latLng);
-    setOfficeLocation(query);
+    setOfficeAddress(query);
   };
 
   useEffect(() => {

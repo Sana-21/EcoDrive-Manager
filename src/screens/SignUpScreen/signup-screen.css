@@ -39,14 +39,15 @@
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
   font-size: 18px;
 }
 
 .btn-container {
+  margin-top: 5%;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 5px;
   font-weight: bold;
 }
 

@@ -22,7 +22,7 @@ function EditScreen() {
         }
     }, [dispatch, userId]);
 
-    
+
     const { manager } = userData;
 
     const [formState, setFormState] = useState({
@@ -68,22 +68,22 @@ function EditScreen() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
         try {
             const formData = new FormData();
             formData.append("companyName", formState.companyName);
             formData.append("officeLocation", formState.officeLocation);
             formData.append("officeImage", formState.selectedFile);
-    
+
             const response = await axios.put(`http://localhost:3001/api/manager/${manager.id}`, formData);
-    
+
             if (response.data.success) {
                 setFormState(prevState => ({
                     ...prevState,
                     errorMessage: "",
                     passwordChangeSuccess: false
                 }));
-    
+
                 // Display success message for 2 seconds
                 setTimeout(() => {
                     setFormState(prevState => ({
@@ -94,7 +94,7 @@ function EditScreen() {
             } else {
                 setFormState(prevState => ({
                     ...prevState,
-                    errorMessage: response.data.message 
+                    errorMessage: response.data.message
                 }));
             }
         } catch (error) {
@@ -105,17 +105,17 @@ function EditScreen() {
             }));
         }
     };
-    
+
     const handlePasswordChangeSubmit = async (event) => {
         event.preventDefault();
-    
+
         try {
             const { currentPassword, newPassword } = formState;
             const response = await axios.put(`http://localhost:3001/api/manager/${manager.id}/change-password`, {
                 currentPassword,
                 newPassword
             });
-    
+
             if (response.data.success) {
                 // Update state to indicate password change success
                 setFormState(prevState => ({
@@ -123,7 +123,7 @@ function EditScreen() {
                     passwordChangeSuccess: true,
                     errorMessage: "",
                 }));
-    
+
                 // Display success message for 2 seconds
                 setTimeout(() => {
                     setFormState(prevState => ({
@@ -146,17 +146,25 @@ function EditScreen() {
             }));
         }
     };
-    
 
-  
+
+
+    const handleCancelPasswordChange = () => {
+        setFormState(prevState => ({
+            ...prevState,
+            passwordPopupOpen: false,
+            errorMessage: "" // Reset error message
+        }));
+    };
 
     const handleOpenPasswordPopup = () => {
         setFormState(prevState => ({
             ...prevState,
-            passwordPopupOpen: true
+            passwordPopupOpen: true,
+            errorMessage: "",
         }));
     };
-    
+
 
     return (
         <div className="edit-bg">
@@ -233,9 +241,10 @@ function EditScreen() {
                         <button id="change-password" onClick={handleOpenPasswordPopup}>Change Password</button>
                         {formState.errorMessage && <div className="error-message">{formState.errorMessage}</div>}
                         {formState.passwordChangeSuccess && <div className="success-message">Password changed successfully!</div>}
-                        <div className="btn-container">
-                            <MainButton text="Save Changes" type="submit" />
+                        <div className="save-button">
+                        <MainButton text="Save Changes" type="submit" className="btn-container" />
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -267,7 +276,7 @@ function EditScreen() {
                         </div>
                         <div className="pass-btn-container">
                             <button className="main-button" type="submit">Change</button>
-                            <button className="cancel-button" onClick={() => setFormState(prevState => ({ ...prevState, passwordPopupOpen: false }))}>Cancel</button>
+                            <button className="cancel-button" onClick={handleCancelPasswordChange}>Cancel</button>
                         </div>
                     </form>
                 </div>
