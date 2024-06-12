@@ -1,5 +1,5 @@
 .list-item-holder {
-    height: 65px;
+    height: auto;
     display: flex;
     align-items: center;
     width: 90%;
@@ -22,6 +22,18 @@
     border: 1px solid #1f3e41;
   }
   
+  .list-item-cross-image-holder .status-item{
+    height: 60px;
+    width: 60px;
+    background-color: white;
+    border-radius: 50%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border: 1px solid #1f3e41;
+  }
+
   .list-item-image {
     height: 100%;
     width: 100%;
@@ -29,11 +41,11 @@
     border-radius: 50%;
   }
   
+
   .list-item-details {
     display: flex;
     align-items: center;
     flex: 1;
-    margin-left: 10px;
     justify-content: space-between;
     width: 100%;
   }
@@ -48,4 +60,14 @@
   .list-item-buttons {
     display: flex;
     gap: 15px;
+  }
+
+  .cross-image {
+    cursor: pointer;
+  }
+  
+  .tick-image {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
   }

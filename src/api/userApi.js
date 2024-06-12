@@ -3,9 +3,10 @@ import axios from 'axios';
 export const apiLogin = async (email, password) => {
   try {
     const response = await axios.post('http://localhost:3001/api/manager/login', { email, password });
-    console.log("login");
-    console.log(response.data);
-    return response.data;
+    if (response.status === 200) {
+      return response.data.userId;
+    }
+    throw new Error('Login failed');
   } catch (error) {
     throw error;
   }
@@ -14,9 +15,6 @@ export const apiLogin = async (email, password) => {
 export const apiFetchUserData= async (userId) => {
   try {
     const response = await axios.get(`http://localhost:3001/api/manager/${userId}`);
-
-    console.log("fetch");
-    console.log(response.data);
     return response.data;
   } catch (error) {
     throw error;

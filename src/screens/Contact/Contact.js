@@ -11,7 +11,7 @@ import './contact.css'; // Import your CSS file for styling
 const ContactPage = () => {
   return (
     <div className="contact-container">
-      <Header showButton={true} showOptions={true} />
+      <Header showSignIn={true} showSignUp={true} showOptions={true} />
       <div className="contact-content">
         <h2>Contact EcoDrive</h2>
         <p>

@@ -8,7 +8,7 @@ import footer4 from '../../assets/images/money-transfer.png'
 const AboutPage = () => {
     return (
         <div>
-            <Header showButton={true} showOptions={true} />
+            <Header showSignIn={true} showSignUp={true} showOptions={true} />
             <div className="page-container">
                 <div className="page-header">
                     <h2>About EcoDrive</h2>

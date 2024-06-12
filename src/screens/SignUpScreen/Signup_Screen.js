@@ -15,7 +15,7 @@ function SignupScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [officeLocation, setOfficeLocation] = useState("");
+    const [officeAddress, setOfficeAddress] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
@@ -54,9 +54,19 @@ function SignupScreen() {
             formData.append("companyName", companyName);
             formData.append("email", email);
             formData.append("password", password);
+<<<<<<< HEAD
             formData.append("officeLocation", officeLocation);
             formData.append("officeLatitude", selectedLocation.lat); 
             formData.append("officeLongitude", selectedLocation.lng);
+=======
+            formData.append("officeAddress", officeAddress);
+            // formData.append("officeLatitude", selectedLocation.lat); 
+            // formData.append("officeLongitude", selectedLocation.lng);
+            formData.append("officeLocation", JSON.stringify({
+                longitude: selectedLocation.lng,
+                latitude: selectedLocation.lat
+            }));
+>>>>>>> feature/display-company-users
             formData.append("officeImage", selectedFile);
 
             const response = await axios.post("http://localhost:3001/api/manager/signup", formData);
@@ -75,7 +85,7 @@ function SignupScreen() {
 
     return (
         <div className="signup-bg">
-            <Header showButton={true} showOptions={true} />
+            <Header showSignIn={true} showSignUp={false} showOptions={true} />
 
             <div className="network-box">
                 {successMessage && <div className="success-message">{successMessage}</div>}
@@ -149,7 +159,7 @@ function SignupScreen() {
                                             id="office-location"
                                             placeholder="Address"
                                             required
-                                            value={officeLocation}
+                                            value={officeAddress}
                                             readOnly 
                                         />
                                         <div className="location-button">
@@ -163,7 +173,11 @@ function SignupScreen() {
                            >
                             {(close) => (
                                 <div className="popup">
+<<<<<<< HEAD
                                     <SearchLocationInput setSelectedLocation={setSelectedLocation} setOfficeLocation={setOfficeLocation}/>
+=======
+                                    <SearchLocationInput setSelectedLocation={setSelectedLocation} setOfficeAddress={setOfficeAddress} />
+>>>>>>> feature/display-company-users
                                     <MapComponent selectedLocation={selectedLocation} />
                                     <div className="btn-container">
                                     <MainButton text="Add Location" onClick={() => { close(); setSelectedLocation(selectedLocation);
@@ -181,10 +195,11 @@ function SignupScreen() {
                                 name="officeImage"
                                 onChange={handleFileChange}
                             />
-                        </div>
-                        <div className="btn-container">
+                            <div className="btn-container">
                             <MainButton text="Sign Up" type="submit" />
+                            </div>
                         </div>
+                       
                     </form>
                 </div>
             </div>

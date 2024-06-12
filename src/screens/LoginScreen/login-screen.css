@@ -43,9 +43,11 @@
     width: 100%;
   }
   
-  .btn-container {
+  .login-btn-container {
     text-align: center;
+    margin-top: 0%;
     padding-top: 10px;
+    margin-bottom: 5%;
   }
   
   .form-control {
@@ -87,3 +89,23 @@
       transform: translate(-50%, -50%);
     }
   }
+
+  
+.error-message {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  margin-top: 10%;
+}
+
+.error-message {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.error-message.fade-out {
+  opacity: 0;
+}

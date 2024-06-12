@@ -4,9 +4,20 @@ import searchIcon from "../../assets/images/search-icon.png";
 import crossMark from "../../assets/images/cross-mark.png"; // Ensure the path is correct
 import ListItem from "../ListItem/ListItem";
 import SecondaryButton from "../SecondaryButton/SecondaryButton";
-function List({ title, quantity, placeholder }) {
+
+function List({title, quantity,items, onStatusChange }) {
   const [searchActive, setSearchActive] = useState(false);
+  const [filteredItems, setFilteredItems] = useState([]);
   const searchRef = useRef(null);
+
+  // Handle search input change
+  const handleSearchChange = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filtered = items.filter((item) =>
+      item.toLowerCase().includes(searchTerm)
+    );
+    setFilteredItems(filtered);
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -32,8 +43,9 @@ function List({ title, quantity, placeholder }) {
             <input
               type="text"
               className="search-input"
-              placeholder={placeholder}
+              placeholder= "search"
               autoFocus
+              onChange={handleSearchChange}
             />
             <img
               src={crossMark}
@@ -50,25 +62,20 @@ function List({ title, quantity, placeholder }) {
             onClick={() => setSearchActive(true)}
           />
         )}
-        <SecondaryButton text="Add" backgroundColor="#92e3a9" /> 
       </div>
       <div className="list-body">
         <div className="list-items">
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
-          <ListItem />
+          {items.length > 0 ? (
+            items.map((item, index) => (
+              <ListItem
+              key={index}
+              item={item} 
+              onStatusChange={onStatusChange}
+             />
+            ))
+          ) : (
+            <div className="no-items">No items found</div>
+          )}
         </div>
       </div>
     </div>

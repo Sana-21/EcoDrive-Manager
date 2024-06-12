@@ -67,10 +67,11 @@
     list-style-type: none;
     display: flex;
     margin-left: 10%;
+    margin-right: 50%;
   }
   
   .header-list li {
-    margin-right: 60px;
+    margin-right: 100px;
     color: #737373;
     font-family: 'Inter', sans-serif;
     text-decoration: none;
