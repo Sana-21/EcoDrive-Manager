@@ -47,7 +47,7 @@ function EditScreen() {
             setFormState(prevState => ({
                 ...prevState,
                 companyName: manager.companyName || "",
-                officeLocation: manager.officeLocation || ""
+                officeLocation: manager.officeAddress || ""
             }));
         }
     }, [userData]);
@@ -168,7 +168,7 @@ function EditScreen() {
 
     return (
         <div className="edit-bg">
-            <Header showButton={false} showOptions={true} />
+            <Header showButton={false} showOptions={false} />
 
             <div className="edit-box">
                 <div className="edit-title">
