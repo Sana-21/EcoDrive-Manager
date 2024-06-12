@@ -61,6 +61,7 @@ function SignupScreen() {
                 longitude: selectedLocation.lng,
                 latitude: selectedLocation.lat
             }));
+
             formData.append("officeImage", selectedFile);
 
             const response = await axios.post("http://localhost:3001/api/manager/signup", formData);
@@ -170,7 +171,8 @@ function SignupScreen() {
                                     <SearchLocationInput setSelectedLocation={setSelectedLocation} setOfficeAddress={setOfficeAddress} />
                                     <MapComponent selectedLocation={selectedLocation} />
                                     <div className="btn-container">
-                                    <MainButton text="Add Location" onClick={() => { close(); setSelectedLocation(selectedLocation); }}/>
+                                    <MainButton text="Add Location" onClick={() => { close(); setSelectedLocation(selectedLocation);
+                                     }}/>
                                     </div>
                                 </div>
                             )}
