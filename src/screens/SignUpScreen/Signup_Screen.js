@@ -54,11 +54,8 @@ function SignupScreen() {
             formData.append("companyName", companyName);
             formData.append("email", email);
             formData.append("password", password);
-<<<<<<<<< Temporary merge branch 1
-            formData.append("officeLocation", officeLocation);
             formData.append("officeLatitude", selectedLocation.lat); 
             formData.append("officeLongitude", selectedLocation.lng);
-=========
             formData.append("officeAddress", officeAddress);
             // formData.append("officeLatitude", selectedLocation.lat); 
             // formData.append("officeLongitude", selectedLocation.lng);
