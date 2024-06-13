@@ -54,11 +54,11 @@ function SignupScreen() {
             formData.append("companyName", companyName);
             formData.append("email", email);
             formData.append("password", password);
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
             formData.append("officeLocation", officeLocation);
             formData.append("officeLatitude", selectedLocation.lat); 
             formData.append("officeLongitude", selectedLocation.lng);
-=======
+=========
             formData.append("officeAddress", officeAddress);
             // formData.append("officeLatitude", selectedLocation.lat); 
             // formData.append("officeLongitude", selectedLocation.lng);
@@ -66,7 +66,7 @@ function SignupScreen() {
                 longitude: selectedLocation.lng,
                 latitude: selectedLocation.lat
             }));
->>>>>>> feature/display-company-users
+
             formData.append("officeImage", selectedFile);
 
             const response = await axios.post("http://localhost:3001/api/manager/signup", formData);
@@ -173,11 +173,7 @@ function SignupScreen() {
                            >
                             {(close) => (
                                 <div className="popup">
-<<<<<<< HEAD
-                                    <SearchLocationInput setSelectedLocation={setSelectedLocation} setOfficeLocation={setOfficeLocation}/>
-=======
                                     <SearchLocationInput setSelectedLocation={setSelectedLocation} setOfficeAddress={setOfficeAddress} />
->>>>>>> feature/display-company-users
                                     <MapComponent selectedLocation={selectedLocation} />
                                     <div className="btn-container">
                                     <MainButton text="Add Location" onClick={() => { close(); setSelectedLocation(selectedLocation);
